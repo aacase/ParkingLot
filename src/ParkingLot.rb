@@ -1,5 +1,6 @@
 require_relative 'card'
 require_relative 'car'
+require_relative 'ParkingLotException'
 
 class ParkingLot
 	def initialize total_slots
@@ -10,7 +11,10 @@ class ParkingLot
 		return @total_slots
 	end
 
-	def park car
+	def park! car
+		if availible_total == 0
+			raise ParkingLotException.new("No availible parking lot availible")
+		end
 		return Card.new(car.id)
 	end
 end
