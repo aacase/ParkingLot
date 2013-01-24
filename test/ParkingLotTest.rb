@@ -9,8 +9,8 @@ class ParkingLotTest < Test::Unit::TestCase
 		@sut = ParkingLot.new 10
 	end
 
-	def test_given_empty_lot_should_return_total_slot_number_as_availible_slots
-		assert_equal(10, @sut.availible_total)
+	def test_given_empty_lot_should_return_total_slot_number_as_available_slots
+		assert_equal(10, @sut.available_total)
 	end
 
 	def test_given_parking_one_car_succeed_should_return_a_card_with_id_same_as_car
@@ -21,11 +21,14 @@ class ParkingLotTest < Test::Unit::TestCase
 		assert_equal(ID, card.id)
 	end
 
-	def test_given_park_to_parking_lot_has_0_slot_should_raise_exception
-		sut = ParkingLot.new 0
+	def test_given_parking_to_parking_lot_has_no_available_slot_should_raise_exception
+		sut = ParkingLot.new 1
+
+		sut.park! Car.new('Dont Care')
 
 		assert_raise(ParkingLotException) do
 			sut.park! Car.new(ID)
 		end
 	end
+
 end

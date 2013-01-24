@@ -5,16 +5,16 @@ require_relative 'ParkingLotException'
 class ParkingLot
 	def initialize total_slots
 		@total_slots = total_slots
+		@available_total = total_slots
 	end
 
-	def availible_total
-		return @total_slots
-	end
+	attr_reader :available_total
 
 	def park! car
-		if availible_total == 0
-			raise ParkingLotException.new("No availible parking lot availible")
+		if @available_total == 0
+			raise ParkingLotException.new("No available parking lot available")
 		end
+		@available_total -= 1
 		return Card.new(car.id)
 	end
 end
