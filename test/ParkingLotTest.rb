@@ -31,4 +31,9 @@ class ParkingLotTest < Test::Unit::TestCase
 		end
 	end
 
+	def test_given_parking_lot_full_should_full_be_true
+		sut = ParkingLot.new 0
+
+		assert(sut.full?)
+	end
 end

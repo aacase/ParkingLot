@@ -10,6 +10,10 @@ class ParkingLot
 
 	attr_reader :available_total
 
+	def full?
+		return available_total == 0
+	end
+
 	def park! car
 		if @available_total == 0
 			raise ParkingLotException.new("No available parking lot available")
