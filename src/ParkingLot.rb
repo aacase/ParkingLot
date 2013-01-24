@@ -15,11 +15,13 @@ class ParkingLot
 	end
 
 	def park! car
-		if @available_total == 0
-			raise ParkingLotException.new("No available parking lot available")
-		end
+		raise ParkingLotException.new("No available parking lot available") if self.full?
 		@available_total -= 1
 		return Card.new(car.id)
+	end
+
+	def take card
+		return Car.new(card.id)
 	end
 end
 

@@ -36,4 +36,13 @@ class ParkingLotTest < Test::Unit::TestCase
 
 		assert(sut.full?)
 	end
+	
+	def test_take_a_car_with_a_valid_card_should_return_the_car
+		car = Car.new(ID)
+		card = @sut.park! car
+
+		actual = @sut.take card
+
+		assert_equal(ID, car.id)
+	end
 end
