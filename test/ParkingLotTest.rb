@@ -39,12 +39,20 @@ class ParkingLotTest < Test::Unit::TestCase
 	end
 	
 	def test_take_a_car_with_a_valid_card_should_return_the_car
-		@car = Car.new(ID)
 		card = @sut.park! @car
 
 		actual = @sut.take card
 
 		assert_equal(ID, @car.id)
+	end
+
+	def test_take_a_car_with_same_card_twice_should_second_take_raise_exception
+		card = @sut.park! @car
+		@sut.take card
+
+		assert_raise(ParkingLotException) do
+			@sut.take card
+		end
 	end
 end
 

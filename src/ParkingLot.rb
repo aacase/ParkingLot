@@ -6,6 +6,7 @@ class ParkingLot
 	def initialize total_slots
 		@total_slots = total_slots
 		@available_total = total_slots
+		@cards = Array.new
 	end
 
 	attr_reader :available_total
@@ -17,10 +18,14 @@ class ParkingLot
 	def park! car
 		raise ParkingLotException.new("No available parking lot available") if self.full?
 		@available_total -= 1
-		return Card.new(car.id)
+		card = Card.new(car.id)
+		@cards.push(card)
+		return card
 	end
 
 	def take card
+		raise ParkingLotException.new('Invalid parking card') if not @cards.include?(card)
+		@cards.delete(card)
 		return Car.new(card.id)
 	end
 end
