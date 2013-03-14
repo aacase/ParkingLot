@@ -3,16 +3,16 @@ require_relative 'car'
 require_relative 'ParkingLotException'
 
 class ParkingLot
+
 	def initialize total_slots
 		@total_slots = total_slots
 		@available_total = total_slots
 		@cards = []
 	end
 
-	attr_reader :available_total
 
 	def full?
-		return available_total == 0
+		return @available_total == 0
 	end
 
 	def park! car

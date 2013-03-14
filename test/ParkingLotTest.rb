@@ -12,7 +12,7 @@ class ParkingLotTest < Test::Unit::TestCase
 	end
 
 	def test_given_empty_lot_should_return_total_slot_number_as_available_slots
-		assert_equal(Capacity, @sut.available_total)
+		assert(!@sut.full?)
 	end
 
 	def test_given_parking_one_car_succeed_should_return_a_card_with_id_same_as_car
