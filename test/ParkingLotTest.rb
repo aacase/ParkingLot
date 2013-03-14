@@ -4,14 +4,15 @@ require 'test/unit'
 
 class ParkingLotTest < Test::Unit::TestCase
 	ID = '10001'
+    Capacity = 10
 
 	def setup
-		@sut = ParkingLot.new 10
+		@sut = ParkingLot.new Capacity
 		@car = Car.new ID
 	end
 
 	def test_given_empty_lot_should_return_total_slot_number_as_available_slots
-		assert_equal(10, @sut.available_total)
+		assert_equal(Capacity, @sut.available_total)
 	end
 
 	def test_given_parking_one_car_succeed_should_return_a_card_with_id_same_as_car
@@ -41,17 +42,17 @@ class ParkingLotTest < Test::Unit::TestCase
 	def test_take_a_car_with_a_valid_card_should_return_the_car
 		card = @sut.park! @car
 
-		actual = @sut.take card
+		actual = @sut.take! card
 
 		assert_equal(ID, @car.id)
 	end
 
 	def test_take_a_car_with_same_card_twice_should_second_take_raise_exception
 		card = @sut.park! @car
-		@sut.take card
+		@sut.take! card
 
 		assert_raise(ParkingLotException) do
-			@sut.take card
+			@sut.take! card
 		end
 	end
 end
