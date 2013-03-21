@@ -6,7 +6,6 @@ require_relative 'FakeParkingLot'
 
 class ValetTest < Test::Unit::TestCase
 
-	LotCapacity = 10
 	ID = '1000001'
 
 	def setup
@@ -46,6 +45,12 @@ class ValetTest < Test::Unit::TestCase
 		card = @valet.park! @car
 		actual_car = @valet.take! card
 		assert_equal(@car.id, actual_car.id)
+	end
+
+	def test_given_invalid_card_when_take_then_throw_exception
+		assert_raise(ParkingLotException) do
+			@valet.take! Card.new(11111)
+		end
 	end
 end
 
