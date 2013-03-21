@@ -26,6 +26,10 @@ class ParkingLot
 		return card
 	end
 
+	def include?(car_id)
+		!@cards.select{|card| card.id == car_id}.first.nil?
+	end
+
 	def take! card
 		raise ParkingLotException.new('Invalid parking card')\
 			unless @cards.include?(card)
