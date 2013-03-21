@@ -17,6 +17,15 @@ class ValetTest < Test::Unit::TestCase
 		@car = Car.new ID
 	end
 
+	def test_given_valet_with_all_lots_emtpy_when_ask_if_has_any_space_then_return_true
+		assert(@valet.has_empty_space?)
+	end
+
+	def test_given_valet_with_no_lots_when_ask_if_has_any_space_then_return_false
+		valet = Valet.new
+		assert(!valet.has_empty_space?)
+	end
+
 	def test_given_valet_when_park_a_car_then_correct_card_returns
 		card = @valet.park! @car
 		assert_equal(ID, card.id)
